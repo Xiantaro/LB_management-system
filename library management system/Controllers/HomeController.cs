@@ -36,13 +36,22 @@ namespace library_management_system.Controllers
         {
             return View();
         }
-        public IActionResult AppointmentManagement()
+        public ActionResult BorrowRecord()
         {
-            return View();
+            return PartialView("_BorrowRecordPartial");
         }
-        public IActionResult BorrowingRecord()
+        public ActionResult AppointmentManagement()
         {
-            return View();
+            return PartialView("_AppointmentManagementPartial");
         }
+
+        //public IActionResult AppointmentManagement()
+        //{
+        //    return View();
+        //}
+        //public IActionResult BorrowingRecord()
+        //{
+        //    return View();
+        //}
     }
 }

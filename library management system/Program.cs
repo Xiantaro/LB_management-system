@@ -22,7 +22,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=BorrowingRecord}/{id?}")
+    pattern: "{controller=Home}/{action=index}/{id?}")
     .WithStaticAssets();
 
 
