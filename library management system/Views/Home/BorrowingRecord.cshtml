@@ -1,0 +1,83 @@
+﻿<div class="container text-center p-2 align-middle">
+    <h1>借閱紀錄管理</h1>
+    <form>
+        <div class="row justify-content-center mt-3">
+            <div class="col-1">
+                <label class="col-form-label">姓名: </label>
+            </div>
+            <div class="col-3">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-1">
+                <label class="col-form-label">書名: </label>
+            </div>
+            <div class="col-3">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-1">
+                <label class="col-form-label">日期範圍: </label>
+            </div>
+            <div class="col-3 my-auto">
+                <input type="date" class="col-form-label w-100">
+            </div>
+        </div>
+        <button class="btn btn-primary mt-2">查詢</button>
+    </form>
+    <hr>
+</div>
+<div class="container border border-5 mt-2">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">借閱者</th>
+                <th scope="col">書籍名稱</th>
+                <th scope="col">借出日期</th>
+                <th scope="col">預期回書日期</th>
+                <th scope="col">實際還書</th>
+                <th scope="col">狀態</th>
+                <th scope="col">_</th>
+                <th>匯出</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="justify-content-md-center">
+                <td class="align-middle">持續買進</td>
+                <td class="align-middle">老王</td>
+                <td class="align-middle">2025-06-23</td>
+                <td class="align-middle">2025-06-30</td>
+                <td class="align-middle">7天</td>
+                <td class="align-middle">借出</td>
+                <td class="align-middle">詳細資訊</td>
+                <td>+</td>
+                <td class="align-middle"><button class="btn btn-danger">通知</button></td>
+                <td class="align-middle"><button class="btn btn-primary">回書</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="container mt-3">
+    <div class="d-flex justify-content-center align-items-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
