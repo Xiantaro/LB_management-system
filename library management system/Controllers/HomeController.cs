@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace library_management_system.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
