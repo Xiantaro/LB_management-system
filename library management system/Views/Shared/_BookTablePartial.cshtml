@@ -1,0 +1,54 @@
+﻿<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">預約編號</th>
+            <th scope="col">書籍編號</th>
+            <th scope="col">書籍名稱</th>
+            <th scope="col">借閱人ID</th>
+            <th scope="col">借閱人名稱</th>
+            <th scope="col">預約日期</th>
+            <th scope="col">目前順位</th>
+            <th scope="col">狀況</th>
+            <th scope="col" class="text-center">功能操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int x = 0; x < 10; x++)
+        {
+            <tr>
+                <td class="align-middle">AK47</td>
+                <td class="align-middle">IJL25344153</td>
+                <td class="align-middle">持續買進</td>
+                <td class="align-middle">UID215613</td>
+                <td class="align-middle">老王</td>
+                <td class="align-middle">2025-06-30</td>
+                <td class="align-middle">1</td>
+                <td class='text-bg-success align-middle'>等待</td>
+                <td class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-warning mx-auto">通知</button>
+                    <button type="button" class="btn btn-danger mx-auto">取消預約</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="container d-flex justify-content-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous"  data-page="1">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int x = 1; x < 5; x++)
+            {
+                <li class="page-item"><a class="page-link" href="#" data-page="@x">@x</a></li>
+            }
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next"  data-page="2">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

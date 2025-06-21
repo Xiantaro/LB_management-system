@@ -41,18 +41,16 @@ namespace library_management_system.Controllers
         {
             return PartialView("_BorrowRecordPartial");
         }
+        // 預約管理_搜尋排列_partial
         public ActionResult AppointmentManagement()
-        {
+        {  
             return PartialView("_AppointmentManagementPartial");
         }
-
-        //public IActionResult AppointmentManagement()
-        //{
-        //    return View();
-        //}
-        //public IActionResult BorrowingRecord()
-        //{
-        //    return View();
-        //}
+        // 預約管理_查詢列表_partial
+        public ActionResult BookListTable(string reservationNum = "All", string borrowID = "我是ID", string bookNum = "持續買進", DateTime? initDate = null, DateTime? lastDate = null)
+        {
+            Debug.WriteLine("測試載入" + reservationNum + " " + borrowID + " " + bookNum + " " + initDate + " " + lastDate);
+            return PartialView("_BookTablePartial");
+        }
     }
 }
