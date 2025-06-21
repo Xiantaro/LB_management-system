@@ -37,20 +37,27 @@ namespace library_management_system.Controllers
         {
             return View();
         }
-        public ActionResult BorrowRecord()
-        {
-            return PartialView("_BorrowRecordPartial");
-        }
         // 預約管理_搜尋排列_partial
-        public ActionResult AppointmentManagement()
+        public ActionResult AppointmentQuery()
         {  
-            return PartialView("_AppointmentManagementPartial");
+            return PartialView("_AppointmentQueryPartial");
         }
         // 預約管理_查詢列表_partial
-        public ActionResult BookListTable(string reservationNum = "All", string borrowID = "我是ID", string bookNum = "持續買進", DateTime? initDate = null, DateTime? lastDate = null)
+        public ActionResult AppointmentResult(string appointment_reservationNum = "All", string appointment_UserID = "我是ID", string appointment_bookNum = "持續買進", DateTime? appointment_initDate = null, DateTime? appointment_lastDate = null, string? appointment_state = "All", string appointment_perPage = "10", string appointment_orderDate = "desc")
         {
-            Debug.WriteLine("測試載入" + reservationNum + " " + borrowID + " " + bookNum + " " + initDate + " " + lastDate);
-            return PartialView("_BookTablePartial");
+            Debug.WriteLine("測試載入:  預約ID:" + appointment_reservationNum + " 使用者ID:" + appointment_UserID + " 書本名稱:" + appointment_bookNum + " 開始日期:" + appointment_initDate + " 今天日期:" + appointment_lastDate + " 狀態:" + appointment_state +" 頁數:" + appointment_perPage + " 日期排序:" + appointment_orderDate);
+            return PartialView("_AppointmentResultPartial");
+        }
+        // 借閱查詢_搜尋排列_partial
+        public ActionResult BorrowQuery()
+        {
+            return PartialView("_BorrowQueryPartial");
+        }
+        // 借閱查詢_查詢列表_partial
+        public ActionResult BorrowResult(string borrow_UserID = "All", string borrow_bookNum = "All", string borrow_state = "All")
+        {
+            Debug.WriteLine($"{borrow_UserID} + {borrow_bookNum} + {borrow_state}");
+            return PartialView("_BorrowResultPartial");
         }
     }
 }
