@@ -2,28 +2,28 @@
 <table class="table mt-2">
     <thead>
         <tr>
+            <th scope="col">借閱編號</th>
             <th scope="col">書籍編號</th>
             <th scope="col">借閱書籍</th>
             <th scope="col">借閱人名稱</th>
             <th scope="col">借閱日期</th>
-            <th scope="col">預計還書日期</th>
+            <th scope="col">還書日期</th>
             <th scope="col">實際還書日期</th>
             <th scope="col">借閱狀況</th>
-            <th scope="col">功能操作</th>
         </tr>
     </thead>
     <tbody>
         @for (int x = 0; x < 10; x++)
         {
             <tr>
+                <td class="align-middle">AL305</td>
                 <td class="align-middle">IJL25344153</td>
                 <td class="align-middle">持續買進</td>
                 <td class="align-middle">老王</td>
                 <td class="align-middle">2025-06-23</td>
+                <td class="align-middle">2025-07-30</td>
                 <td class="align-middle">2025-06-30</td>
-                <td class="align-middle">7天</td>
                 <td class='text-bg-success align-middle'>借出中</td>
-                <td><button type="button" class="btn btn-danger">通知</button></td>
             </tr>
         }
     </tbody>

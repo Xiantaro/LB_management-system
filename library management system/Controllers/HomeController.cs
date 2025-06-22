@@ -54,10 +54,10 @@ namespace library_management_system.Controllers
             return PartialView("_BorrowQueryPartial");
         }
         // 綷琩高_琩高_partial
-        public ActionResult BorrowResult(string borrow_UserID = "All", string borrow_bookNum = "All", string borrow_state = "All")
+        public ActionResult BorrowResult(string borrow_BorrowID = "All",string borrow_UserID = "All", string borrow_bookNum = "All", string borrow_state = "All", string borrow_perPage = "10",string borrow_date = "borrowDate", string borrow_orderDate = "desc")
         {
-            Debug.WriteLine($"{borrow_UserID} + {borrow_bookNum} + {borrow_state}");
-            return PartialView("_BorrowResultPartial");
+            Debug.WriteLine($"代刚綷更 {borrow_BorrowID}+{borrow_UserID} + {borrow_bookNum} + {borrow_state} + {borrow_perPage} + {borrow_date} + {borrow_orderDate}");
+            return PartialView("_BorrowResultPartial"); 
         }
     }
 }

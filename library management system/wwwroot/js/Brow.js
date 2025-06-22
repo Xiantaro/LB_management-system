@@ -6,7 +6,7 @@ $(() => {
 })
 //-----------------------------------------------
 //-----------------------------------------------
-// 預約查詢Module
+// 預約查詢Module  "START""
 // 載入綁定_預約及借閱partial
 function AppointmentQueryModule() {
     initAppointmentPage();
@@ -45,11 +45,11 @@ function appointment_pagePikeEvent() {
 function appointment_clearEvent() {
     $("#appointmenSearch")[0].reset();
 }
-// END
+// 預約查詢Module "END""
 //--------------------------------------------------------------------
 //--------------------------------------------------------------------
 // **施工中**
-// 借閱查詢Module
+// 借閱查詢Module START
 function BorrowQueryModule() {
     initBorrowPage();
     console.log("借閱查詢施工開始");
@@ -60,6 +60,8 @@ function initBorrowPage() {
         console.log("成功載入");
         borrow_queryEvent();
         $("#borrow_select").on("click", borrow_queryEvent);
+        $(document).on("change", "#borrow_perPage,#borrow_date, #borrow_orderDate", borrow_queryEvent)
+        $("#borrow_clear").on("click", () => { $("#borrowForm")[0].reset(); })
     })
 }
 // 搜尋
@@ -69,9 +71,12 @@ function borrow_queryEvent() {
     $.get("/Home/BorrowResult", borrowData, (result) => {
         $("#BorrowContent").html(result);
         console.log("成功");
-        //$("#borrowForm")[0].reset();
+        $(".page-link").on("click", borrow_pagePikeEvent)
     })
-    
 }
-
-//排序
+// 分頁
+function borrow_pagePikeEvent() {
+    const value = $(".page-link").data("page");
+    console.log("現在的值" + value);
+}
+// 借閱查詢Module END
