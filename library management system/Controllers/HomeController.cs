@@ -59,11 +59,43 @@ namespace library_management_system.Controllers
             Debug.WriteLine($"代刚綷更 {borrow_BorrowID}+{borrow_UserID} + {borrow_bookNum} + {borrow_state} + {borrow_perPage} + {borrow_date} + {borrow_orderDate}");
             return PartialView("_BorrowResultPartial");
         }
-
         // 家Α_partial
         public ActionResult BorrowMode()
         {
             return PartialView("_BorrowModePartial");
         }
+        // 家Α_
+        [HttpPost]
+        public ActionResult BorrowSend()
+        {
+            Debug.WriteLine("Θ");
+            return PartialView("_BorrowModeContent");
+        }
+        // 家Α_戈癟
+        public ActionResult BorrowUserMessage()
+        {
+            Debug.WriteLine("Θ更戈癟");
+            return PartialView("_BorrowModeUser");
+        }
+        // 家Α_戈癟
+        public ActionResult BorrowBookMessage()
+        {
+            Debug.WriteLine("Θ更戈癟");
+            return PartialView("_BorrowModeBook");
+        }
+        // 临家Α_partial
+        public ActionResult ReturnBookMode()
+        {
+            Debug.WriteLine("秈临家Α");
+            return PartialView("_ReturnBookPartial");
+        }
+        // 临家Α_临
+        [HttpPost]
+        public ActionResult ReturnBookSend()
+        {
+            Debug.WriteLine("临家ΑΘ");
+            return PartialView("_ReturnBookContent");
+        }
+
     }
 }

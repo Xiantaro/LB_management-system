@@ -3,7 +3,8 @@ $(() => {
     console.log("已綁定事件");
     $("#AppointmentQuery").on("click", AppointmentQueryModule)
     $("#BorrowQuery").on("click", BorrowQueryModule)
-    $("#BorrowMode").on("click", BorrowModeModule )
+    $("#BorrowMode").on("click", BorrowModeMode)
+    $("#ReturnMode").on("click", ReturnBookMode);
 })
 //-----------------------------------------------
 //-----------------------------------------------
@@ -81,14 +82,55 @@ function borrow_pagePikeEvent() {
 // 借閱查詢Module END
 //--------------------------------------------------------------------
 //--------------------------------------------------------------------
-// 借書 partialview
-function BorrowModeModule() {
+// 借書模式 START partialview
+function BorrowModeMode() {
     console.log("借書模式測試");
     $("#content-panel").load("/Home/BorrowMode", () => {
         console.log("借書載入成功");
-        $("#borrowSend").on("click", () => {
-            alert("送出成功")
-        })
+        $("#borrowSend").on("click", BorrowModeSend);
+        BorrowModeModeUser();
+        BorrowModeModeBook();
     });
 }
+//借閱者 parital
+function BorrowModeModeUser() {
+    $.get("/Home/BorrowUserMessage", (result) => {
+        $("#BorrowModeUser").html(result);
+        console.log("成功取得借閱人資訊")
+    })
+}
+//書本資訊 parital
+function BorrowModeModeBook() {
+    $.get("/Home/BorrowBookMessage", (result) => {
+        $("#BorrowModeBook").html(result);
+        console.log("成功取得書本資訊")
+    })
+}
+// 借閱書籍發送POST
+function BorrowModeSend() {
+    $.post("/Home/BorrowSend", (result) => {
+        $("#BorrowModeSuccessContent").html(result);
+        alert("借書成功");
+    })
+}
 
+// 借書模式 END
+//--------------------------------------------------------------------
+//--------------------------------------------------------------------
+// 還書模式 START
+function ReturnBookMode() {
+    $("#content-panel").load("/Home/ReturnBookMode", () => {
+        $("#ReturnBookBtn").on("click", ReturnBookSend)
+    })
+}
+
+// 還書送出
+function ReturnBookSend() {
+    $.post("/Home/ReturnBookSend", (result) => {
+        $("#ReturnBookContent").html(result);
+        $("#ReturnBookID").val("");
+    })
+}
+// 還書模式 END
+//--------------------------------------------------------------------
+//--------------------------------------------------------------------
