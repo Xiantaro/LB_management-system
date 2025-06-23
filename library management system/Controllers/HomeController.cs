@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using System.Net;
+using System.Threading.Tasks;
 using library_management_system.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -91,11 +93,10 @@ namespace library_management_system.Controllers
         }
         // 還書模式_還書
         [HttpPost]
-        public ActionResult ReturnBookSend()
+        public  IActionResult ReturnBookSend(string ReturnBookID)
         {
-            Debug.WriteLine("還書模式成功");
-            return PartialView("_ReturnBookContent");
+            Debug.WriteLine("進入ViewComponent");
+            return ViewComponent("ReturingBook", new { bookid = ReturnBookID });
         }
-
     }
 }

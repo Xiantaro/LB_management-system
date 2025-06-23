@@ -126,7 +126,10 @@ function ReturnBookMode() {
 
 // 還書送出
 function ReturnBookSend() {
-    $.post("/Home/ReturnBookSend", (result) => {
+    alert("回書作業開始");
+    let data = $("#ReturnBookIdForm").serialize();
+    alert("回書作業......");
+    $.post("/Home/ReturnBookSend", data, (result) => {
         $("#ReturnBookContent").html(result);
         $("#ReturnBookID").val("");
     })
