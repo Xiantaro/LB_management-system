@@ -3,6 +3,7 @@ $(() => {
     console.log("已綁定事件");
     $("#AppointmentQuery").on("click", AppointmentQueryModule)
     $("#BorrowQuery").on("click", BorrowQueryModule)
+    $("#BorrowMode").on("click", BorrowModeModule )
 })
 //-----------------------------------------------
 //-----------------------------------------------
@@ -80,3 +81,16 @@ function borrow_pagePikeEvent() {
     console.log("現在的值" + value);
 }
 // 借閱查詢Module END
+//--------------------------------------------------------------------
+//--------------------------------------------------------------------
+// 借書 partialview
+function BorrowModeModule() {
+    console.log("借書模式測試");
+    $("#content-panel").load("/Home/BorrowMode", () => {
+        console.log("借書載入成功");
+        $("#borrowSend").on("click", () => {
+            alert("送出成功")
+        })
+    });
+}
+
