@@ -42,16 +42,14 @@ function appointment_pagePikeEvent() {
     console.log(value);
 }
 // 清空搜尋資料
-function appointment_clearEvent() {
-    $("#appointmenSearch")[0].reset();
+function appointment_clearEvent() {$("#appointmenSearch")[0].reset();
 }
 // 預約查詢Module "END""
 //--------------------------------------------------------------------
 //--------------------------------------------------------------------
 // **施工中**
 // 借閱查詢Module START
-function BorrowQueryModule() {
-    initBorrowPage();
+function BorrowQueryModule() {initBorrowPage();
     console.log("借閱查詢施工開始");
 }
 // 借閱查詢(搜尋欄)_初始載入
