@@ -31,12 +31,11 @@ function initAppointmentPage() {
 // 搜尋
 function appointment_queryEvent() {
     const currentQuery = $("#appointmenSearch").serialize();
-    $.get("/Home/AppointmentResult", currentQuery, (result) => {
+    $.post("/Home/AppointmentResult", currentQuery, (result) => {
         $("#AppointmentContent").html(result);
         $(".page-link").on("click", appointment_pagePikeEvent);
     });
     console.log("已成功查詢");
-    //$("#appointmenSearch")[0].reset();
 }
 // 分頁
 function appointment_pagePikeEvent() {
