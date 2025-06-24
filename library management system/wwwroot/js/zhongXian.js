@@ -1,4 +1,4 @@
-﻿// #region 載入模組 => 預約查詢、借閱查詢、借書預約模式、還書模式
+﻿// #region 載入parital => 預約查詢、借閱查詢、借書預約模式、還書模式
 $(() => {
     console.log("已綁定事件");
     $("#AppointmentQuery").on("click", AppointmentQueryModule)
@@ -35,10 +35,20 @@ function appointment_queryEvent() {
     $.post("/Home/AppointmentResult", formData, (result) => {
         $("#AppointmentContent").html(result);
         $(".page-link").on("click", appointment_queryEvent);
+        $(".appoimtmentCancelBtn").on("click", appointment_cancelEvent);
     });
-    console.log("已成功查詢");
+    console.log("查詢刷新~");
 }
-
+// 取消預約按鈕
+function appointment_cancelEvent() {
+    let appointmentid = $(this).closest("tr").find(".appointmentid").data("appointmentid");
+    $.post("/Home/AppointmentCancel", { appointmentid: appointmentid }, (result) => {
+        if (result == "") { alert(`成功取消預約，預約編號: ${appointmentid}`)}
+        else { alert("預約取消失敗"); } 
+        appointment_queryEvent();
+    })
+    console.log("取消按鈕測試: " + appointmentid );
+}
 
 // 清空搜尋資料
 function appointment_clearEvent() {$("#appointmenSearch")[0].reset();

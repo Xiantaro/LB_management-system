@@ -29,27 +29,32 @@ namespace library_management_system.Controllers
         #region 預約管理&查詢
         // 預約管理_搜尋排列_partial
         
-        public ActionResult AppointmentQuery()
+        public IActionResult AppointmentQuery()
         {
             return PartialView("_AppointmentQueryPartial");
         }
         //預約管理_查詢列表_partial
-        [HttpPost]
-        public ActionResult AppointmentResult(string appointment_reservationNum = "All", string appointment_UserID = "我是ID", string appointment_bookNum = "持續買進", DateTime? appointment_initDate = null, DateTime? appointment_lastDate = null, string? appointment_state = "All", string appointment_perPage = "10", string appointment_orderDate = "desc", int page = 1)
+       
+        public IActionResult AppointmentResult(string appointment_reservationNum = "All", string appointment_UserID = "我是ID", string appointment_bookNum = "持續買進", DateTime? appointment_initDate = null, DateTime? appointment_lastDate = null, string? appointment_state = "All", string appointment_perPage = "10", string appointment_orderDate = "desc", int page = 1)
         {
             Debug.WriteLine("測試載入:  預約ID:" + appointment_reservationNum + " 使用者ID:" + appointment_UserID + " 書本名稱:" + appointment_bookNum + " 開始日期:" + appointment_initDate + " 今天日期:" + appointment_lastDate + " 狀態:" + appointment_state + " 頁數:" + appointment_perPage + " 日期排序:" + appointment_orderDate + "頁數" + page);
             return PartialView("_AppointmentResultPartial");
         }
+        public IActionResult AppointmentCancel(string appointmentid)
+        {
+            Debug.WriteLine($"測試回傳取消預約編號: {appointmentid}");
+            return Ok();
+        }
         #endregion
 
         #region 借閱查詢
-        // 借閱查詢_搜尋排列_partial
-        public ActionResult BorrowQuery()
+            // 借閱查詢_搜尋排列_partial
+        public IActionResult BorrowQuery()
         {
             return PartialView("_BorrowQueryPartial");
         }
         // 借閱查詢_查詢列表_partial
-        public ActionResult BorrowResult(string borrow_BorrowID = "All", string borrow_UserID = "All", string borrow_bookNum = "All", string borrow_state = "All", string borrow_perPage = "10", string borrow_date = "borrowDate", string borrow_orderDate = "desc", int page = 1)
+        public IActionResult BorrowResult(string borrow_BorrowID = "All", string borrow_UserID = "All", string borrow_bookNum = "All", string borrow_state = "All", string borrow_perPage = "10", string borrow_date = "borrowDate", string borrow_orderDate = "desc", int page = 1)
         {
             Debug.WriteLine($"測試借閱載入 {borrow_BorrowID}+{borrow_UserID} + {borrow_bookNum} + {borrow_state} + {borrow_perPage} + {borrow_date} + {borrow_orderDate} + 頁數: {page}");
             return PartialView("_BorrowResultPartial");
@@ -58,12 +63,12 @@ namespace library_management_system.Controllers
 
         #region 借閱、預約模式
         // 借書模式_partial
-        public ActionResult BorrowMode()
+        public IActionResult BorrowMode()
         {
             return PartialView("_BorrowModePartial");
         }
         // 借書模式_借書
-        public ActionResult BorrowSend(string borrwoMode_UserID, string borrwoMode_BookNumber)
+        public IActionResult BorrowSend(string borrwoMode_UserID, string borrwoMode_BookNumber)
         {
             #region 測試回傳可刪
             //var mystatu = new BorrowModeSendClass();
@@ -92,7 +97,7 @@ namespace library_management_system.Controllers
             return PartialView("_BorrowModeContent");
         }
         // 借書模式_借書人資訊
-        public ActionResult BorrowUserMessage(string userId)
+        public IActionResult BorrowUserMessage(string userId)
         {
             // 之後要建立 ViewModel 用來裝搜尋到的 借書人資訊
             // 並回傳到 PartialView 上
@@ -100,7 +105,7 @@ namespace library_management_system.Controllers
             return PartialView("_BorrowModeUser");
         }
         // 借書模式_書本資訊
-        public ActionResult BorrowBookMessage(string bookId)
+        public IActionResult BorrowBookMessage(string bookId)
         {
             // 之後要建立 ViewModel 用來裝搜尋到的 書本資訊
             // 並回傳到 PartialView 上
