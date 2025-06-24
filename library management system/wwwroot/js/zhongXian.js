@@ -5,6 +5,7 @@ $(() => {
     $("#BorrowQuery").on("click", BorrowQueryModule)
     $("#BorrowMode").on("click", BorrowModeMode)
     $("#ReturnMode").on("click", ReturnBookMode);
+    $("#AppointmentMode").on("click", AppointmentMode);
 })
 //-----------------------------------------------
 //-----------------------------------------------
@@ -136,3 +137,9 @@ function ReturnBookSend() {
 // 還書模式 END
 //--------------------------------------------------------------------
 //--------------------------------------------------------------------
+// 預約書籍
+function AppointmentMode() {
+    $("#content-panel").load("/Home/AppointmentMode", () => {
+        console.log("成功載入書籍");
+    })
+}

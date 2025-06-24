@@ -33,21 +33,21 @@ namespace library_management_system.Controllers
         {
             return PartialView("_AppointmentQueryPartial");
         }
-        // 預約管理_查詢列表_partial
-        //[HttpPost]
-        //public ActionResult AppointmentResult(string appointment_reservationNum = "All", string appointment_UserID = "我是ID", string appointment_bookNum = "持續買進", DateTime? appointment_initDate = null, DateTime? appointment_lastDate = null, string? appointment_state = "All", string appointment_perPage = "10", string appointment_orderDate = "desc")
-        //{
-        //    Debug.WriteLine("測試載入:  預約ID:" + appointment_reservationNum + " 使用者ID:" + appointment_UserID + " 書本名稱:" + appointment_bookNum + " 開始日期:" + appointment_initDate + " 今天日期:" + appointment_lastDate + " 狀態:" + appointment_state + " 頁數:" + appointment_perPage + " 日期排序:" + appointment_orderDate);
-        //    return PartialView("_AppointmentResultPartial");
-        //}
-        // 預約管理_查詢列表_ViewComponent
+        //預約管理_查詢列表_partial
         [HttpPost]
-        public IActionResult AppointmentResult(string appointment_reservationNum = "All", string appointment_UserID = "我是ID", string appointment_bookNum = "持續買進", DateTime? appointment_initDate = null, DateTime? appointment_lastDate = null, string? appointment_state = "All", string appointment_perPage = "10", string appointment_orderDate = "desc")
+        public ActionResult AppointmentResult(string appointment_reservationNum = "All", string appointment_UserID = "我是ID", string appointment_bookNum = "持續買進", DateTime? appointment_initDate = null, DateTime? appointment_lastDate = null, string? appointment_state = "All", string appointment_perPage = "10", string appointment_orderDate = "desc")
         {
             Debug.WriteLine("測試載入:  預約ID:" + appointment_reservationNum + " 使用者ID:" + appointment_UserID + " 書本名稱:" + appointment_bookNum + " 開始日期:" + appointment_initDate + " 今天日期:" + appointment_lastDate + " 狀態:" + appointment_state + " 頁數:" + appointment_perPage + " 日期排序:" + appointment_orderDate);
-            return ViewComponent("AppointmentQuery");
-
+            return PartialView("_AppointmentResultPartial");
         }
+        // 預約管理_查詢列表_ViewComponent
+        //[HttpPost]
+        //public IActionResult AppointmentResult(string appointment_reservationNum = "All", string appointment_UserID = "我是ID", string appointment_bookNum = "持續買進", DateTime? appointment_initDate = null, DateTime? appointment_lastDate = null, string? appointment_state = "All", string appointment_perPage = "10", string appointment_orderDate = "desc")
+        //{
+        //    Debug.WriteLine("測試載入:  預約ID:" + appointment_reservationNum + " 使用者ID:" + appointment_UserID + " 書本名稱:" + appointment_bookNum + " 開始日期:" + appointment_initDate + " 今天日期:" + appointment_lastDate + " 狀態:" + appointment_state + " 頁數:" + appointment_perPage + " 日期排序:" + appointment_orderDate);
+        //    return ViewComponent("AppointmentQuery");
+
+        //}
         #endregion
         #region 借閱查詢
         // 借閱查詢_搜尋排列_partial
@@ -97,13 +97,22 @@ namespace library_management_system.Controllers
         }
         // 還書模式_還書_ViewComponent
         [HttpPost]
-        public  IActionResult ReturnBookSend(string ReturnBookID)
+        public IActionResult ReturnBookSend(string ReturnBookID)
         {
             Debug.WriteLine("進入ViewComponent");
-            return ViewComponent("ReturingBook", new { bookid = ReturnBookID });
+            return PartialView("_ReturnBookContent");
         }
         #endregion
         #region 預約模式
+        public IActionResult AppointmentMode()
+        {
+            Debug.WriteLine("進入預約模式");
+            return PartialView("__BorrowModePartial");
+        }
+        public IActionResult AppointmentSend()
+        {
+            return PartialView();
+        }
         #endregion
         //------------------------------------------------------------------------------------------
     }
