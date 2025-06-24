@@ -1,15 +1,14 @@
-﻿//載入模組 => 預約查詢、借閱查詢
+﻿// #region 載入模組 => 預約查詢、借閱查詢、借書預約模式、還書模式
 $(() => {
     console.log("已綁定事件");
     $("#AppointmentQuery").on("click", AppointmentQueryModule)
     $("#BorrowQuery").on("click", BorrowQueryModule)
     $("#BorrowMode").on("click", BorrowModeMode)
     $("#ReturnMode").on("click", ReturnBookMode);
-    $("#AppointmentMode").on("click", AppointmentMode);
 })
-//-----------------------------------------------
-//-----------------------------------------------
-// 預約查詢Module  "START""
+// #endregion
+
+// #region 預約查詢&管理 Module
 // 載入綁定_預約及借閱partial
 function AppointmentQueryModule() {
     initAppointmentPage();
@@ -29,31 +28,25 @@ function initAppointmentPage() {
         $("#appointment_clear").on("click", appointment_clearEvent);
     });
 };
-// 搜尋
+// 搜尋、排列、分頁
 function appointment_queryEvent() {
-    const currentQuery = $("#appointmenSearch").serialize();
-    $.post("/Home/AppointmentResult", currentQuery, (result) => {
+    const value = $(this).data("page") || 1;
+    let formData = $("#appointmenSearch").serialize() + `&page=${value}`;
+    $.post("/Home/AppointmentResult", formData, (result) => {
         $("#AppointmentContent").html(result);
-        $(".page-link").on("click", appointment_pagePikeEvent);
+        $(".page-link").on("click", appointment_queryEvent);
     });
     console.log("已成功查詢");
 }
-// 分頁
-function appointment_pagePikeEvent() {
-    const value = $(this).data("page");
-    console.log(value);
-}
+
+
 // 清空搜尋資料
 function appointment_clearEvent() {$("#appointmenSearch")[0].reset();
 }
-// 預約查詢Module "END""
-//--------------------------------------------------------------------
-//--------------------------------------------------------------------
-// **施工中**
-// 借閱查詢Module START
-function BorrowQueryModule() {initBorrowPage();
-    console.log("借閱查詢施工開始");
-}
+// #endregion 預約查詢Module "END""
+
+// #region 借閱查詢Module
+function BorrowQueryModule() {initBorrowPage();}
 // 借閱查詢(搜尋欄)_初始載入
 function initBorrowPage() {
     $("#content-panel").load("/Home/BorrowQuery", () => {
@@ -64,60 +57,67 @@ function initBorrowPage() {
         $("#borrow_clear").on("click", () => { $("#borrowForm")[0].reset(); })
     })
 }
-// 搜尋
+// 搜尋、分頁、排列
 function borrow_queryEvent() {
-    console.log("搜尋開始");
-    const borrowData = $("#borrowForm").serialize();
+    let value = $(this).data("page") || 1;
+    let borrowData = $("#borrowForm").serialize() + `&page=${value}`;
     $.get("/Home/BorrowResult", borrowData, (result) => {
         $("#BorrowContent").html(result);
         console.log("成功");
-        $(".page-link").on("click", borrow_pagePikeEvent)
+        $(".page-link").on("click", borrow_queryEvent)
     })
 }
-// 分頁
-function borrow_pagePikeEvent() {
-    const value = $(".page-link").data("page");
-    console.log("現在的值" + value);
-}
-// 借閱查詢Module END
-//--------------------------------------------------------------------
-//--------------------------------------------------------------------
-// 借書模式 START partialview
+// #endregion 借閱查詢Module END
+
+// #region 借書預約模式 Module
 function BorrowModeMode() {
     console.log("借書模式測試");
     $("#content-panel").load("/Home/BorrowMode", () => {
         console.log("借書載入成功");
-        $("#borrowSend").on("click", BorrowModeSend);
-        BorrowModeModeUser();
-        BorrowModeModeBook();
+        $("#borrowSend, #appointmentSend").on("click", BorrowModeSend);
+        BorrowModeModeUserDynamic();
+        BorrowModeModeBookDynamic();
+        $("#borrwoMode_UserID").on("input", BorrowModeModeUserDynamic)
+        $("#borrwoMode_BookNumber").on("input", BorrowModeModeBookDynamic);
     });
 }
-//借閱者 parital
-function BorrowModeModeUser() {
-    $.get("/Home/BorrowUserMessage", (result) => {
+// 動態搜尋 借閱者
+function BorrowModeModeUserDynamic() {
+    let userId = $("#borrwoMode_UserID").val();
+    $.post("/Home/BorrowUserMessage", { userId: userId }, (result) => {
         $("#BorrowModeUser").html(result);
-        console.log("成功取得借閱人資訊")
     })
 }
-//書本資訊 parital
-function BorrowModeModeBook() {
-    $.get("/Home/BorrowBookMessage", (result) => {
+// 動態搜尋 書本資訊
+function BorrowModeModeBookDynamic() {
+    console.log("測試書本資訊");
+    let bookId = $("#borrwoMode_BookNumber").val();
+    $.post("/Home/BorrowBookMessage", { bookId: bookId }, (result) => {
         $("#BorrowModeBook").html(result);
-        console.log("成功取得書本資訊")
     })
 }
-// 借閱書籍發送POST
+// 借閱、預約書籍 發送POST
 function BorrowModeSend() {
-    $.post("/Home/BorrowSend", (result) => {
-        $("#BorrowModeSuccessContent").html(result);
-        alert("借書成功");
-    })
-}
+    let formData = $("#borrwoModeForm").serialize();
+    let btnValue = $(this).val();
+    if (btnValue === "borrow") {
+        alert(btnValue);
+        $.post("/Home/BorrowSend", formData, (result) => {
+            $("#BorrowModeSuccessContent").html(result);
+        })
+    }
+    else {
+        alert(btnValue);
+        $.post("/Home/AppointmentSend", formData, (result) => {
+            $("#BorrowModeSuccessContent").html(result);
+        })
+    }
+    
+} 
 
-// 借書模式 END
-//--------------------------------------------------------------------
-//--------------------------------------------------------------------
-// 還書模式 START
+// #endregion 借書模式 END
+
+// #region 還書模式 Module
 function ReturnBookMode() {
     $("#content-panel").load("/Home/ReturnBookMode", () => {
         $("#ReturnBookBtn").on("click", ReturnBookSend)
@@ -126,20 +126,10 @@ function ReturnBookMode() {
 
 // 還書送出
 function ReturnBookSend() {
-    alert("回書作業開始");
     let data = $("#ReturnBookIdForm").serialize();
-    alert("回書作業......");
     $.post("/Home/ReturnBookSend", data, (result) => {
         $("#ReturnBookContent").html(result);
         $("#ReturnBookID").val("");
     })
 }
-// 還書模式 END
-//--------------------------------------------------------------------
-//--------------------------------------------------------------------
-// 預約書籍
-function AppointmentMode() {
-    $("#content-panel").load("/Home/AppointmentMode", () => {
-        console.log("成功載入書籍");
-    })
-}
+// #endregion 還書模式 END Module
