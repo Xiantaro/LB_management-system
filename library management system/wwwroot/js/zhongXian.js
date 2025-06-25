@@ -147,11 +147,37 @@ function ReturnBookSend() {
 
 // #region 預約管理
 function AppointmentMode() {
-    console.log("管理按鈕測試");
-    $.post("/Home/AppointmentMode1", () => {
+    console.log("預約管理連結測試");
+    $("#content-panel").load("/Home/AppointmentMode1", () => {
         console.log("已進入Action")
+        $("#appointmentSend").on("click", AppointmentModeSend);
+        $("#appointmentMode_KeyWord").on("input", AppointmentModeBookDynamic);
     })
 }
+// 輸入書本名稱顯示
+function AppointmentModeBookDynamic() {
+    let keyWord = $(this).val();
+    if (keyWord === " ") {
+        alert("請不要輸入空字串");
+        $("#appointmentMode_KeyWord").val("");
+        $("#appointmentMode_KeyWord").focus();
+        return
+    }
+    $.post("/Home/AppointmentMode1Query", { keyWord: keyWord }, (result) => {
+        $("#appointmentQueryBook").html(result);
+        console.log("成功載入書本");
+    });
+}
+// 預約按鈕發送
+function AppointmentModeSend() {
+    let formData = $("#appointmentModeForm").serialize();
+    console.log("測試輸入: " + formData);
+    $.post("/Home/AppointmentMode1Send", formData, (result) => {
+        $("#appointmentSuccessContent").html(result);
+        console.log("預約按鈕是否成功回傳，YEEEEEE")
+    })
+}
+
 
 // #endregion
 

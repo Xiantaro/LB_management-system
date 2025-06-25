@@ -131,13 +131,20 @@ namespace library_management_system.Controllers
         public IActionResult AppointmentMode1()
         {
             Debug.WriteLine("箇家Α更Θ...............");
-            return Ok();
+            return PartialView("~/Views/Appoimtment/_AppoimtmentPartial.cshtml");
         }
-        public IActionResult Appoimt2()
+        public IActionResult AppointmentMode1Send(string appointmentMode_UserID, string appointmentMode_BookNumber)
         {
-            Debug.WriteLine("箇家Α更Θ...............");
-            return Ok();
+            Debug.WriteLine("セ箇猵 更Θ...." + "ㄏノID: " + appointmentMode_UserID + "膟ID: " + appointmentMode_BookNumber);
+
+            return PartialView("~/Views/Appoimtment/_AppoimtmentContent.cshtml", appointmentMode_UserID);
         }
+        public IActionResult AppointmentMode1Query(string keyWord)
+        {
+            Debug.WriteLine($"箇セ琩高 更Θ....{keyWord}");
+            return PartialView("~/Views/Appoimtment/_AppoimtmentModeQuery.cshtml");
+        }
+        
         #endregion
         //------------------------------------------------------------------------------------------
     }

@@ -1,14 +1,18 @@
 ﻿<div class="container">
     <div class="row">
-        <div class="col-5 my-1">
-            <h1>借閱與預約</h1>
+        <div class="col-3 my-1">
+            <h1>預約模式</h1>
             <hr />
-            <form id="borrwoModeForm" class="mt-5">
-                <div class="col-7">
-                    <label class="fs-3" for="appointmentMode_UserID">借閱者ID:</label>
+            <form id="appointmentModeForm" class="mt-5">
+                <div class="col-10">
+                    <label class="fs-3" for="appointmentMode_UserID">關鍵字查詢: </label>
+                    <input id="appointmentMode_KeyWord" type="text" class="form-control" />
+                </div>
+                <div class="col-10">
+                    <label class="fs-3" for="appointmentMode_UserID">借閱者ID: </label>
                     <input id="appointmentMode_UserID" type="text" name="appointmentMode_UserID" class="form-control" />
                 </div>
-                <div class="col-7">
+                <div class="col-10">
                     <label class="fs-3" for="appointmentMode_BookNumber">書籍編號: </label>
                     <input id="appointmentMode_BookNumber" type="text" name="appointmentMode_BookNumber" class="form-control" />
                 </div>
@@ -17,12 +21,28 @@
                 </div>
             </form>
             @*借書發送後的顯示*@
-            <div id="BorrowModeSuccessContent"></div>
+            <div id="appointmentSuccessContent"></div>
         </div>
-        <div class="col-7" style="height: 660px">
-            <div id="BorrowModeUser"></div>@*借閱者資訊*@
-            <div id="BorrowModeBook"></div>@*書本資訊*@
-        </div>
+        <div class="col-9" style="height: 660px" id="appointmentQueryBook">
+            <table class="table mt-2" >
+                <thead>
+                    <tr>
+                        <th scope="col">預約編號</th>
+                        <th scope="col">書籍編號</th>
+                        <th scope="col">書籍名稱</th>
+                        <th scope="col">借閱人ID</th>
+                        <th scope="col">借閱人名稱</th>
+                        <th scope="col">預約日期</th>
+                        <th scope="col">狀況</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--<div id="appointmentQueryBook"></div>-->
+                    @*查詢書本*@
+                </tbody>
+            </table>
+</div>
     </div>
 </div>
 
