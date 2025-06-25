@@ -56,16 +56,17 @@ function appointment_clearEvent() {$("#appointmenSearch")[0].reset();
 }
 // #endregion 預約查詢Module "END""
 
-// #region 借閱查詢Module
+// #region 借閱查詢 Module
 function BorrowQueryModule() {initBorrowPage();}
 // 借閱查詢(搜尋欄)_初始載入
 function initBorrowPage() {
     $("#content-panel").load("/Home/BorrowQuery", () => {
-        console.log("成功載入");
+        console.log("成功載入_借閱模式");
         borrow_queryEvent();
         $("#borrow_select").on("click", borrow_queryEvent);
-        $(document).on("change", "#borrow_perPage,#borrow_date, #borrow_orderDate", borrow_queryEvent)
-        $("#borrow_clear").on("click", () => { $("#borrowForm")[0].reset(); })
+        $(document).on("change", "#borrow_perPage,#borrow_date, #borrow_orderDate", borrow_queryEvent);
+        $("#borrow_clear").on("click", () => { $("#borrowForm")[0].reset(); });
+        
     })
 }
 // 搜尋、分頁、排列
@@ -80,7 +81,7 @@ function borrow_queryEvent() {
 }
 // #endregion 借閱查詢Module END
 
-// #region 借書模式 Module
+// #region 借閱模式 Module
 function BorrowModeMode() {
     console.log("借書模式測試");
     $("#content-panel").load("/Home/BorrowMode", () => {
@@ -90,19 +91,21 @@ function BorrowModeMode() {
         BorrowModeModeBookDynamic();
         $("#borrwoMode_UserID").on("input", BorrowModeModeUserDynamic)
         $("#borrwoMode_BookNumber").on("input", BorrowModeModeBookDynamic);
+        $("#borrwoMode_CancelUserIDBtn, #borrwoMode_CancelBookIdBtn").on("click", CancelBtn)
     });
 }
 // 動態搜尋 借閱者
 function BorrowModeModeUserDynamic() {
     let userId = $("#borrwoMode_UserID").val();
+    console.log("測試動態借閱者資訊: " + userId);
     $.post("/Home/BorrowUserMessage", { userId: userId }, (result) => {
         $("#BorrowModeUser").html(result);
     })
 }
 // 動態搜尋 書本資訊
 function BorrowModeModeBookDynamic() {
-    console.log("測試書本資訊");
     let bookId = $("#borrwoMode_BookNumber").val();
+    console.log("測試動態書本資訊: " + bookId);
     $.post("/Home/BorrowBookMessage", { bookId: bookId }, (result) => {
         $("#BorrowModeBook").html(result);
     })
@@ -131,7 +134,8 @@ function BorrowModeSend() {
 // #region 還書模式 Module
 function ReturnBookMode() {
     $("#content-panel").load("/Home/ReturnBookMode", () => {
-        $("#ReturnBookBtn").on("click", ReturnBookSend)
+        $("#ReturnBookBtn").on("click", ReturnBookSend);
+        $("#ReturnBook_CancelBookNumBtn").on("click", CancelBtn);
     })
 }
 
@@ -145,27 +149,37 @@ function ReturnBookSend() {
 }
 // #endregion 還書模式 END Module
 
-// #region 預約管理
+// #region 預約管理 Module
 function AppointmentMode() {
-    console.log("預約管理連結測試");
+    console.log("預約管理進入");
     $("#content-panel").load("/Home/AppointmentMode1", () => {
         console.log("已進入Action")
         $("#appointmentSend").on("click", AppointmentModeSend);
         $("#appointmentMode_KeyWord").on("input", AppointmentModeBookDynamic);
+        $("#appointmentMode_CancelUserIdBtn ,#appointmentMode_CancelBookNumBtn").on("click", CancelBtn);
+        $("#appointmentMode_CancelKeyWordBtn").on("click", CancelBtn_AppointVersion);
+        $("#appointment_state, #appointment_perPage").on("change", AppointmentModeBookDynamic);
     })
-}
-// 輸入書本名稱顯示
+} 
+
+// 關鍵字查詢
 function AppointmentModeBookDynamic() {
-    let keyWord = $(this).val();
+    let keyWord = $("#appointmentMode_KeyWord").val(); 
+    let state = $("#appointment_state").val();
+    let pageCount = $("#appointment_perPage").val();
+    let obj = { keyWord: keyWord, state: state, pageCount: pageCount }
+    console.log(`${state}與${pageCount}`);
     if (keyWord === " ") {
         alert("請不要輸入空字串");
         $("#appointmentMode_KeyWord").val("");
         $("#appointmentMode_KeyWord").focus();
         return
     }
-    $.post("/Home/AppointmentMode1Query", { keyWord: keyWord }, (result) => {
+    if (keyWord === "") { $("#appointmentQueryBook").remove; $("#appointmentQueryBook").html(appointmentQueryBookHtml); return }
+    $.post("/Home/AppointmentMode1Query", obj, (result) => {
         $("#appointmentQueryBook").html(result);
         console.log("成功載入書本");
+        $(".AppointmentMode_AddBookNumBtn").on("click", AppointmentModeAddBook);
     });
 }
 // 預約按鈕發送
@@ -177,7 +191,44 @@ function AppointmentModeSend() {
         console.log("預約按鈕是否成功回傳，YEEEEEE")
     })
 }
+// 加入書籍編號到輸入框
+function AppointmentModeAddBook() {
+    let bookNumber = $(this).closest("tr").find("td").data("booknumber");
+    console.log("你的書本編號: " + bookNumber )
+    $("#appointmentMode_BookNumber").val(bookNumber);
+}
+// 關鍵字專屬清潔按鈕
+function CancelBtn_AppointVersion() {
+    console.log("點擊清除按鈕");
+    $(this).closest(".input-group").find(".form-control").val("");
+    $("#appointmentQueryBook").remove; $("#appointmentQueryBook").html(appointmentQueryBookHtml); 
+}
 
 
+// #endregion 預約管理 Module END
+
+
+
+// #region 通用函數
+// 按鈕清除 
+function CancelBtn() {
+    console.log("點擊清除按鈕")
+    $(this).closest(".input-group").find(".form-control").val("");
+}
 // #endregion
 
+// #region 各種HTML
+// 預約模式_顯示欄位
+let appointmentQueryBookHtml = `<table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th scope="col">書籍編號</th>
+                            <th scope="col">書籍名稱</th>
+                            <th scope="col">狀況</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table><h1 class="text-danger">查無書籍</h1>`;
+// #endregion

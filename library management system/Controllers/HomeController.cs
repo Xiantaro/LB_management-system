@@ -62,7 +62,7 @@ namespace library_management_system.Controllers
         }
         #endregion
 
-        #region 綷箇家Α
+        #region 綷家Α
         // 家Α_partial
         public IActionResult BorrowMode()
         {
@@ -139,9 +139,9 @@ namespace library_management_system.Controllers
 
             return PartialView("~/Views/Appoimtment/_AppoimtmentContent.cshtml", appointmentMode_UserID);
         }
-        public IActionResult AppointmentMode1Query(string keyWord)
+        public IActionResult AppointmentMode1Query(string keyWord, string state, string pageCount)
         {
-            Debug.WriteLine($"箇セ琩高 更Θ....{keyWord}");
+            Debug.WriteLine($"箇セ琩高 更Θ....{keyWord}{state}{pageCount}");
             return PartialView("~/Views/Appoimtment/_AppoimtmentModeQuery.cshtml");
         }
         

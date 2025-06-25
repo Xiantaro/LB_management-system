@@ -1,20 +1,25 @@
 ﻿<div class="container">
     <div class="row">
         <div class="col-5 my-1">
-            <h1>借閱與預約</h1>
+            <h1>借閱模式</h1>
             <hr />
             <form id="borrwoModeForm" class="mt-5">
                 <div class="col-7">
                     <label class="fs-3" for="borrwoMode_UserID">借閱者ID:</label>
-                    <input id="borrwoMode_UserID" type="text" name="borrwoMode_UserID" class="form-control" />
+                    <div class="input-group">
+                        <input id="borrwoMode_UserID" type="text" name="borrwoMode_UserID" class="form-control" />
+                        <button class="btn btn-outline-secondary" type="button" id="borrwoMode_CancelUserIDBtn">&times;</button>
+                    </div>
                 </div>
                 <div class="col-7">
                     <label class="fs-3" for="borrwoMode_BookNumber">書籍編號: </label>
-                    <input id="borrwoMode_BookNumber" type="text" name="borrwoMode_BookNumber" class="form-control" />
+                    <div class="input-group">
+                        <input id="borrwoMode_BookNumber" type="text" name="borrwoMode_BookNumber" class="form-control" />
+                        <button class="btn btn-outline-secondary" type="button" id="borrwoMode_CancelBookIdBtn">&times;</button>
+                    </div>
                 </div>
                 <div class="my-4">
                     <button id="borrowSend" type="button" class="btn btn-success btn-lg" value="borrow">借閱</button>
-                    <button id="appointmentSend" type="button" class="btn btn-success btn-lg" value="appointment">預約</button>
                 </div>
             </form>
             @*借書發送後的顯示*@

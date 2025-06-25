@@ -1,60 +1,34 @@
 ﻿<table class="table mt-2">
     <thead>
         <tr>
-            <th scope="col">預約編號</th>
             <th scope="col">書籍編號</th>
             <th scope="col">書籍名稱</th>
-            <th scope="col">借閱人ID</th>
-            <th scope="col">借閱人名稱</th>
-            <th scope="col">預約日期</th>
             <th scope="col">狀況</th>
             <th scope="col">操作</th>
         </tr>
     </thead>
     <tbody>
-        @for (int x = 1; x < 11; x++)
+        @for (int x = 1; x < 12; x++)
         {
             @if (x % 3 == 0)
             {
-                @if (x % 2 == 0)
-                {
-                    <tr>
-                        <td class="align-middle">AK47</td>
-                        <td class="align-middle">IJL25344153</td>
-                        <td class="align-middle">持續買進</td>
-                        <td class="align-middle">UID215613</td>
-                        <td class="align-middle">老王</td>
-                        <td class="align-middle">2025-06-30</td>
-                        <td class='text-bg-success align-middle'>借出</td>
-                        <td class="align-middle align-items-center"><button class="btn btn-secondary btn-c" disabled>取消預約</button></td>
-                    </tr>
-                }
                 <tr>
-                    <td class="align-middle">AK47</td>
-                    <td class="align-middle">IJL25344153</td>
-                    <td class="align-middle">持續買進</td>
-                    <td class="align-middle">UID215613</td>
-                    <td class="align-middle">老王</td>
-                    <td class="align-middle">2025-06-30</td>
-                    <td class='text-bg-secondary align-middle'>取消</td>
-                    <td class="align-middle align-items-center "><button class="btn btn-secondary btn-c" disabled>取消預約</button></td>
+                    <td class="align-middle bookNumber" data-booknumber="@x">AAAAASSSSSS</td>
+                    <td class="align-middle">愛麗絲夢遊仙境</td>
+                    <td class='text-bg-success align-middle'>未借出</td>
+                    <td><button type="button" class="btn btn-success AppointmentMode_AddBookNumBtn">加入</button></td>
                 </tr>
             }
-            else
+            else if (x % 2 == 0)
             {
                 <tr>
-                    <td class="align-middle appointmentid" data-appointmentid="IJL25344153">AK47</td>
-                    <td class="align-middle ">IJL25344153</td>
+                    <td class="align-middle bookNumber" data-booknumber="@x">IJL25344153</td>
                     <td class="align-middle">持續買進</td>
-                    <td class="align-middle">UID215613</td>
-                    <td class="align-middle">老王</td>
-                    <td class="align-middle">2025-06-30</td>
-                    <td class='text-bg-danger align-middle'>等待</td>
-                    <td class="align-middle align-items-center"><button class="btn btn-danger appoimtmentCancelBtn" id="">取消預約</button></td>
+                    <td class='text-bg-danger'>借出</td>
+                    <td><button type="button" class="btn btn-success AppointmentMode_AddBookNumBtn">加入</button></td>
                 </tr>
             }
         }
-
     </tbody>
 </table>
 <div class="container d-flex justify-content-center">

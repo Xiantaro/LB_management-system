@@ -4,45 +4,72 @@
             <h1>預約模式</h1>
             <hr />
             <form id="appointmentModeForm" class="mt-5">
-                <div class="col-10">
+                <div class="col-10 ">
                     <label class="fs-3" for="appointmentMode_UserID">關鍵字查詢: </label>
-                    <input id="appointmentMode_KeyWord" type="text" class="form-control" />
+                    <div class="input-group">
+                        <input id="appointmentMode_KeyWord" type="text" class="form-control" />
+                        <button class="btn btn-outline-secondary" type="button" id="appointmentMode_CancelKeyWordBtn">&times;</button>
+                    </div>
                 </div>
                 <div class="col-10">
                     <label class="fs-3" for="appointmentMode_UserID">借閱者ID: </label>
-                    <input id="appointmentMode_UserID" type="text" name="appointmentMode_UserID" class="form-control" />
+                    <div class="input-group">
+                        <input id="appointmentMode_UserID" type="text" name="appointmentMode_UserID" class="form-control" />
+                        <button class="btn btn-outline-secondary" type="button" id="appointmentMode_CancelUserIdBtn">&times;</button>
+                    </div>
                 </div>
                 <div class="col-10">
                     <label class="fs-3" for="appointmentMode_BookNumber">書籍編號: </label>
-                    <input id="appointmentMode_BookNumber" type="text" name="appointmentMode_BookNumber" class="form-control" />
+                    <div class="input-group">
+                        <input id="appointmentMode_BookNumber" type="text" name="appointmentMode_BookNumber" class="form-control" />
+                        <button class="btn btn-outline-secondary" type="button" id="appointmentMode_CancelBookNumBtn">&times;</button>
+                    </div>
                 </div>
                 <div class="my-4">
                     <button id="appointmentSend" type="button" class="btn btn-success btn-lg" value="appointment">預約</button>
                 </div>
-            </form>
-            @*借書發送後的顯示*@
-            <div id="appointmentSuccessContent"></div>
+</form>
+            @*預約發送後的顯示*@
+            <div id="appointmentSuccessContent">
+            </div>
         </div>
-        <div class="col-9" style="height: 660px" id="appointmentQueryBook">
-            <table class="table mt-2" >
-                <thead>
-                    <tr>
-                        <th scope="col">預約編號</th>
-                        <th scope="col">書籍編號</th>
-                        <th scope="col">書籍名稱</th>
-                        <th scope="col">借閱人ID</th>
-                        <th scope="col">借閱人名稱</th>
-                        <th scope="col">預約日期</th>
-                        <th scope="col">狀況</th>
-                        <th scope="col">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--<div id="appointmentQueryBook"></div>-->
-                    @*查詢書本*@
-                </tbody>
-            </table>
-</div>
+        <div class="col-9" style="height: 660px">
+            <div class="d-flex flex-wrap gap-3 justify-content-end">
+                <div>
+                    <label for="appointment_state" class="form-label mb-0">目前狀態：</label>
+                    <select id="appointment_state" name="appointment_state" class="form-select form-select-sm">
+                        <option value="All">全部</option>
+                        <option value="Borrow">借出</option>
+                        <option value="Wait">未借出</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="appointment_perPage" class="form-label mb-0">每頁筆數：</label>
+                    <select id="appointment_perPage" name="appointment_perPage" valus="10" class="form-select form-select-sm">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                </div>
+            </div>
+            <div id="appointmentQueryBook">
+                <table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th scope="col">書籍編號</th>
+                            <th scope="col">書籍名稱</th>
+                            <th scope="col">狀況</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="container align-middle">
+                    <h1 class="text-danger">查無書籍</h1>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
