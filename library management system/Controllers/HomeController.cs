@@ -66,7 +66,7 @@ namespace library_management_system.Controllers
         // 家Α_partial
         public IActionResult BorrowMode()
         {
-            return PartialView("~/Views/Appoimtment&Borrow/_BorrowModePartial.cshtml");
+            return PartialView("~/Views/Borrow/_BorrowModePartial.cshtml");
         }
         // 家Α_
         public IActionResult BorrowSend(string borrwoMode_UserID, string borrwoMode_BookNumber)
@@ -89,13 +89,13 @@ namespace library_management_system.Controllers
             //mystatu.UserId = borrwoMode_UserID;
             //mystatu.BookName = borrwoMode_BookNumber;
             #endregion 
-            return PartialView("~/Views/Appoimtment&Borrow/_BorrowModeContent.cshtml");
+            return PartialView("~/Views/Borrow/_BorrowModeContent.cshtml");
         }
         // 箇家Α_箇
         public IActionResult AppointmentSend(string borrwoMode_UserID, string borrwoMode_BookNumber)
         {
             Debug.WriteLine($"ㄏノ: {borrwoMode_UserID} 膟ID {borrwoMode_BookNumber}");
-            return PartialView("~/Views/Appoimtment&Borrow/_BorrowModeContent.cshtml");
+            return PartialView("~/Views/Borrow/_BorrowModeContent.cshtml");
         }
         // 家Α_戈癟
         public IActionResult BorrowUserMessage(string userId)
@@ -103,7 +103,7 @@ namespace library_management_system.Controllers
             // ぇ璶ミ ViewModel ノㄓ杆穓碝 戈癟
             // 肚 PartialView 
             Debug.WriteLine(userId);
-            return PartialView("~/Views/Appoimtment&Borrow/_BorrowModeUser.cshtml");
+            return PartialView("~/Views/Borrow/_BorrowModeUser.cshtml");
         }
         // 家Α_セ戈癟
         public IActionResult BorrowBookMessage(string bookId)
@@ -111,7 +111,7 @@ namespace library_management_system.Controllers
             // ぇ璶ミ ViewModel ノㄓ杆穓碝 セ戈癟
             // 肚 PartialView 
             Debug.WriteLine(bookId);
-            return PartialView("~/Views/Appoimtment&Borrow/_BorrowModeBook.cshtml");
+            return PartialView("~/Views/Borrow/_BorrowModeBook.cshtml");
         }
         #endregion 綷家ΑEND
 
@@ -126,6 +126,19 @@ namespace library_management_system.Controllers
             return PartialView("~/Views/ReturnBook/_ReturnBookContent.cshtml");
         }
         #endregion 临家Α END
+
+        #region 箇家Α
+        public IActionResult AppointmentMode1()
+        {
+            Debug.WriteLine("箇家Α更Θ...............");
+            return Ok();
+        }
+        public IActionResult Appoimt2()
+        {
+            Debug.WriteLine("箇家Α更Θ...............");
+            return Ok();
+        }
+        #endregion
         //------------------------------------------------------------------------------------------
     }
 }

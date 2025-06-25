@@ -5,6 +5,7 @@ $(() => {
     $("#BorrowQuery").on("click", BorrowQueryModule)
     $("#BorrowMode").on("click", BorrowModeMode)
     $("#ReturnMode").on("click", ReturnBookMode);
+    $("#AppointmentMode").on("click", AppointmentMode);
 })
 // #endregion
 
@@ -79,7 +80,7 @@ function borrow_queryEvent() {
 }
 // #endregion 借閱查詢Module END
 
-// #region 借書預約模式 Module
+// #region 借書模式 Module
 function BorrowModeMode() {
     console.log("借書模式測試");
     $("#content-panel").load("/Home/BorrowMode", () => {
@@ -106,7 +107,7 @@ function BorrowModeModeBookDynamic() {
         $("#BorrowModeBook").html(result);
     })
 }
-// 借閱、預約書籍 發送POST
+// 借閱書籍 發送POST
 function BorrowModeSend() {
     let formData = $("#borrwoModeForm").serialize();
     let btnValue = $(this).val();
@@ -143,3 +144,14 @@ function ReturnBookSend() {
     })
 }
 // #endregion 還書模式 END Module
+
+// #region 預約管理
+function AppointmentMode() {
+    console.log("管理按鈕測試");
+    $.post("/Home/AppointmentMode1", () => {
+        console.log("已進入Action")
+    })
+}
+
+// #endregion
+
