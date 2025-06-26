@@ -27,19 +27,19 @@ namespace library_management_system.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        //------------------------------------------------------------------------------------------
+        //----腑┚舅矪瞶场だ------------------------------------------------------------------------------------------
         #region 箇恨瞶&琩高
         // 箇恨瞶_穓碝逼_partial
         
         public IActionResult AppointmentQuery()
         {
-            return PartialView("~/Views/AppoimtmentQuery/_AppointmentQueryPartial.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/AppoimtmentQuery/_AppointmentQueryPartial.cshtml");
         }
         //箇恨瞶_琩高_partial
         public IActionResult AppointmentResult(string appointment_reservationNum = "All", string appointment_UserID = "и琌ID", string appointment_bookNum = "尿禦秈", DateTime? appointment_initDate = null, DateTime? appointment_lastDate = null, string? appointment_state = "All", string appointment_perPage = "10", string appointment_orderDate = "desc", int page = 1)
         {
             Debug.WriteLine("代刚更:  箇ID:" + appointment_reservationNum + " ㄏノID:" + appointment_UserID + " セ嘿:" + appointment_bookNum + " 秨﹍ら戳:" + appointment_initDate + " さぱら戳:" + appointment_lastDate + " 篈:" + appointment_state + " 计:" + appointment_perPage + " ら戳逼:" + appointment_orderDate + "计" + page);
-            return PartialView("~/Views/AppoimtmentQuery/_AppointmentResultPartial.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/AppoimtmentQuery/_AppointmentResultPartial.cshtml");
         }
         public IActionResult AppointmentCancel(string appointmentid)
         {
@@ -52,13 +52,13 @@ namespace library_management_system.Controllers
             // 綷琩高_穓碝逼_partial
         public IActionResult BorrowQuery()
         {
-            return PartialView("~/Views/BorrowQuery/_BorrowQueryPartial.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/BorrowQuery/_BorrowQueryPartial.cshtml");
         }
         // 綷琩高_琩高_partial
         public IActionResult BorrowResult(string borrow_BorrowID = "All", string borrow_UserID = "All", string borrow_bookNum = "All", string borrow_state = "All", string borrow_perPage = "10", string borrow_date = "borrowDate", string borrow_orderDate = "desc", int page = 1)
         {
             Debug.WriteLine($"代刚綷更 {borrow_BorrowID}+{borrow_UserID} + {borrow_bookNum} + {borrow_state} + {borrow_perPage} + {borrow_date} + {borrow_orderDate} + 计: {page}");
-            return PartialView("~/Views/BorrowQuery/_BorrowResultPartial.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/BorrowQuery/_BorrowResultPartial.cshtml");
         }
         #endregion
 
@@ -66,7 +66,7 @@ namespace library_management_system.Controllers
         // 家Α_partial
         public IActionResult BorrowMode()
         {
-            return PartialView("~/Views/Borrow/_BorrowModePartial.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/Borrow/_BorrowModePartial.cshtml");
         }
         // 家Α_
         public IActionResult BorrowSend(string borrwoMode_UserID, string borrwoMode_BookNumber)
@@ -89,13 +89,13 @@ namespace library_management_system.Controllers
             //mystatu.UserId = borrwoMode_UserID;
             //mystatu.BookName = borrwoMode_BookNumber;
             #endregion 
-            return PartialView("~/Views/Borrow/_BorrowModeContent.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/Borrow/_BorrowModeContent.cshtml");
         }
         // 箇家Α_箇
         public IActionResult AppointmentSend(string borrwoMode_UserID, string borrwoMode_BookNumber)
         {
             Debug.WriteLine($"ㄏノ: {borrwoMode_UserID} 膟ID {borrwoMode_BookNumber}");
-            return PartialView("~/Views/Borrow/_BorrowModeContent.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/Borrow/_BorrowModeContent.cshtml");
         }
         // 家Α_戈癟
         public IActionResult BorrowUserMessage(string userId)
@@ -103,7 +103,7 @@ namespace library_management_system.Controllers
             // ぇ璶ミ ViewModel ノㄓ杆穓碝 戈癟
             // 肚 PartialView 
             Debug.WriteLine(userId);
-            return PartialView("~/Views/Borrow/_BorrowModeUser.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/Borrow/_BorrowModeUser.cshtml");
         }
         // 家Α_セ戈癟
         public IActionResult BorrowBookMessage(string bookId)
@@ -111,19 +111,19 @@ namespace library_management_system.Controllers
             // ぇ璶ミ ViewModel ノㄓ杆穓碝 セ戈癟
             // 肚 PartialView 
             Debug.WriteLine(bookId);
-            return PartialView("~/Views/Borrow/_BorrowModeBook.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/Borrow/_BorrowModeBook.cshtml");
         }
         #endregion 綷家ΑEND
 
         #region 临家Α
         public IActionResult ReturnBookMode()
         {
-            return PartialView("~/Views/ReturnBook/_ReturnBookPartial.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/ReturnBook/_ReturnBookPartial.cshtml");
         }
         public IActionResult ReturnBookSend(string ReturnBookID)
         {
             Debug.WriteLine($"綷{ReturnBookID}临Θ");
-            return PartialView("~/Views/ReturnBook/_ReturnBookContent.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/ReturnBook/_ReturnBookContent.cshtml");
         }
         #endregion 临家Α END
 
@@ -131,18 +131,18 @@ namespace library_management_system.Controllers
         public IActionResult AppointmentMode1()
         {
             Debug.WriteLine("箇家Α更Θ...............");
-            return PartialView("~/Views/Appoimtment/_AppoimtmentPartial.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/Appoimtment/_AppoimtmentPartial.cshtml");
         }
         public IActionResult AppointmentMode1Send(string appointmentMode_UserID, string appointmentMode_BookNumber)
         {
             Debug.WriteLine("セ箇猵 更Θ...." + "ㄏノID: " + appointmentMode_UserID + "膟ID: " + appointmentMode_BookNumber);
 
-            return PartialView("~/Views/Appoimtment/_AppoimtmentContent.cshtml", appointmentMode_UserID);
+            return PartialView("~/Views/Management/P2_zhongXian/Appoimtment/_AppoimtmentContent.cshtml", appointmentMode_UserID);
         }
         public IActionResult AppointmentMode1Query(string keyWord, string state, string pageCount)
         {
             Debug.WriteLine($"箇セ琩高 更Θ....{keyWord}{state}{pageCount}");
-            return PartialView("~/Views/Appoimtment/_AppoimtmentModeQuery.cshtml");
+            return PartialView("~/Views/Management/P2_zhongXian/Appoimtment/_AppoimtmentModeQuery.cshtml");
         }
         
         #endregion
