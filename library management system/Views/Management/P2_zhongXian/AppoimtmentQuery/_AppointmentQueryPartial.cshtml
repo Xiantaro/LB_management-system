@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     string earliestDate = "2025-01-01";
     string DateTiemNow = DateTime.Now.ToString("yyyy-MM-dd");
 }
@@ -49,7 +49,7 @@
             <div class="d-flex flex-wrap gap-3">
                 <div>
                     <label for="appointment_perPage" class="form-label mb-0">每頁筆數：</label>
-                    <select id="appointment_perPage" name="appointment_perPage"  valus="10" class="form-select form-select-sm">
+                    <select id="appointment_perPage" name="appointment_perPage" valus="10" class="form-select form-select-sm">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -69,7 +69,7 @@
         <!-- 搜尋 END-->
         <!-- 借閱狀況 START-->
         <div id="AppointmentContent">
-            
+
         </div>
         <!-- 借閱狀況 END -->
     </div>
@@ -77,3 +77,38 @@
 </div>
 <!-- 主內容 END -->
 
+<form class="modal fade" id="notificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- 置中 -->
+        <div class="modal-content border">
+            <div class="modal-header">
+                <h5 class="modal-title">取消預約&通知</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CancelBox"></button>
+            </div>
+            <div class="modal-body">
+                <form id="NotificationFom">
+                    <div class="mb-3">
+                        <label for="NotificationUser" class="form-label">收件人:</label>
+                        <input type="text" class="form-control" id="NotificationUser" name="NotificationUserInput" readonly disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="NotificationType" class="form-label">通知類型:</label>
+                        <input id="NotificationInput" name="NotificationTypeInput" class="d-none"/>
+                        <select class="form-select" id="NotificationType">
+                            <option value="CancelNotification" selected>取消預約通知</option>
+                            <option value="NormalNotification">通知</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="NotificationTextarea" class="form-label">內容</label>
+                        <textarea class="form-control" id="NotificationTextarea" rows="4" name="NotificationTextareaInput"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-success" id="NotificationSend">送出</button>
+                <button type="button" class="btn btn-danger" id="NotificationClear">清除</button>
+            </div>
+        </div>
+    </div>
+</form>

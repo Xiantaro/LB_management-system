@@ -41,15 +41,15 @@ namespace library_management_system.Controllers
             Debug.WriteLine("測試載入:  預約ID:" + appointment_reservationNum + " 使用者ID:" + appointment_UserID + " 書本名稱:" + appointment_bookNum + " 開始日期:" + appointment_initDate + " 今天日期:" + appointment_lastDate + " 狀態:" + appointment_state + " 頁數:" + appointment_perPage + " 日期排序:" + appointment_orderDate + "頁數" + page);
             return PartialView("~/Views/Management/P2_zhongXian/AppoimtmentQuery/_AppointmentResultPartial.cshtml");
         }
-        public IActionResult AppointmentCancel(string appointmentid)
+        // 預約管理_回傳通知_
+        public IActionResult AppointmentNotification()
         {
-            Debug.WriteLine($"測試回傳取消預約編號: {appointmentid}");
             return Ok();
         }
         #endregion
 
         #region 借閱查詢
-            // 借閱查詢_搜尋排列_partial
+        // 借閱查詢_搜尋排列_partial
         public IActionResult BorrowQuery()
         {
             return PartialView("~/Views/Management/P2_zhongXian/BorrowQuery/_BorrowQueryPartial.cshtml");
