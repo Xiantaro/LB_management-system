@@ -1,4 +1,4 @@
-﻿// #region 載入parital => 預約查詢、借閱查詢、借書預約模式、還書模式
+﻿// #region 載入parital => 預約查詢、借閱查詢、借書模式、還書模式、預約模式
 $(() => {
     console.log("已綁定事件");
     $("#AppointmentQuery").on("click", AppointmentQueryModule)
@@ -149,9 +149,9 @@ function ReturnBookSend() {
 }
 // #endregion 還書模式 END Module
 
-// #region 預約管理 Module
+// #region 預約模式 Module
 function AppointmentMode() {
-    console.log("預約管理進入");
+    console.log("預約模式進入");
     $("#content-panel").load("/Home/AppointmentMode1", () => {
         console.log("已進入Action")
         $("#appointmentSend").on("click", AppointmentModeSend);
@@ -205,9 +205,7 @@ function CancelBtn_AppointVersion() {
 }
 
 
-// #endregion 預約管理 Module END
-
-
+// #endregion 預約模式 Module END
 
 // #region 通用函數
 // 按鈕清除 
@@ -217,7 +215,7 @@ function CancelBtn() {
 }
 // #endregion
 
-// #region 各種HTML
+// #region 可插的HTML
 // 預約模式_顯示欄位
 let appointmentQueryBookHtml = `<table class="table mt-2">
                     <thead>
