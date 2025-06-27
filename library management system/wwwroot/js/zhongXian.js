@@ -251,7 +251,7 @@ function NotificationBtn() {
 // 送出按鈕
 function NotificationMessageSend() {
     let myform = $("#NotificationFom").serialize();
-    $.post("/Home/AppointmentNotification", myform, (result) => {
+    $.post("/Home/Notification", myform, (result) => {
         if (result === "") { alert("成功送出") }
         NotificationClose();
     })
@@ -266,18 +266,6 @@ function NotificationClose() {
     $('#notificationModal').modal("hide");
     $("#NotificationTextarea").val("");
 }
-
-
-// 點擊取消預約 ==> 準備統一
-//function NotificationBtnCancelAppointment() {
-//    let inputrer = $(this).closest("tr").find(".NotificationUserid").text();
-//    $("#NotificationType").val("CancelNotification");
-
-
-//    let typeinput = $("#NotificationType").val();
-//    $("#NotificationInput").val(typeinput);
-//    $("#NotificationUser").val(inputrer)
-//};
 
 // #endregion
 
