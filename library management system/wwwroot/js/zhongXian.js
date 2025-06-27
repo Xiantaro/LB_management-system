@@ -174,7 +174,6 @@ function AppointmentModeBookDynamic() {
     if (keyWord === " ") {
         alert("請不要輸入空字串");
         $("#appointmentMode_KeyWord").val("");
-        $("#appointmentMode_KeyWord").focus();
         return
     }
     if (keyWord === "") { $("#appointmentQueryBook").remove; $("#appointmentQueryBook").html(appointmentQueryBookHtml); return }
