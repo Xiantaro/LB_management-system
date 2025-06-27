@@ -36,50 +36,18 @@ function appointment_queryEvent() {
     $.post("/Home/AppointmentResult", formData, (result) => {
         $("#AppointmentContent").html(result);
         $(".page-link").on("click", appointment_queryEvent);
+
         // 點擊按鈕
-        $(".appoimtmentCancelBtn, .NotificationBtn").on("click", NotificationBtn);
+        $(".NotificationBtn").on("click", NotificationBtn);
+
         $("#NotificationSend").on("click", NotificationMessageSend);
         $("#NotificationClear").on("click", NotificationClearBtn);
         $("#CancelBox").on("click", NotificationClose);
     });
     console.log("查詢刷新~");
 }
-// 取消預約按鈕
-function appointment_cancelEvent() {
-    let appointmentid = $(this).closest("tr").find(".appointmentid").data("appointmentid");
-    $.post("/Home/AppointmentCancel", { appointmentid: appointmentid }, (result) => {
-        if (result == "") { alert(`成功取消預約，預約編號: ${appointmentid}`)}
-        else { alert("預約取消失敗"); } 
-        appointment_queryEvent();
-    })
-    console.log("取消按鈕測試: " + appointmentid );
-}
 
-// 清空搜尋資料
-function appointment_clearEvent() {$("#appointmenSearch")[0].reset();
-}
-// 取消預約
-// 通知開啟按鈕
-function NotificationBtn() {
-    let inputrer = $(this).closest("tr").find(".NotificationUserid").text();
-    let typeinput = $("#NotificationType").val();
-    $("#NotificationInput").val(typeinput);
-    $("#NotificationUser").val(inputrer)
-}
-// 送出按鈕
-function NotificationMessageSend() {
-    let myform = $("#notificationModal").serialize();
-    console.log(myform)
-}
-// 清除按鈕
-function NotificationClearBtn() {
-    $("#NotificationTextarea").val("");
-}
-// 關閉視窗
-function NotificationClose() {
-    console.log("關閉視窗按鈕成功")
-    $("#NotificationTextarea").val("");
-}
+
 
 // #endregion 預約查詢Module "END""
 
@@ -103,7 +71,14 @@ function borrow_queryEvent() {
     $.get("/Home/BorrowResult", borrowData, (result) => {
         $("#BorrowContent").html(result);
         console.log("成功");
-        $(".page-link").on("click", borrow_queryEvent)
+        $(".page-link").on("click", borrow_queryEvent);
+
+        // 點擊按鈕
+        $(".NotificationBtn").on("click", NotificationBtn);
+
+        $("#NotificationSend").on("click", NotificationMessageSend);
+        $("#NotificationClear").on("click", NotificationClearBtn);
+        $("#CancelBox").on("click", NotificationClose);
     })
 }
 // #endregion 借閱查詢Module END
@@ -235,11 +210,75 @@ function CancelBtn_AppointVersion() {
 // #endregion 預約模式 Module END
 
 // #region 通用函數
+
 // 按鈕清除 
 function CancelBtn() {
     console.log("點擊清除按鈕")
     $(this).closest(".input-group").find(".form-control").val("");
 }
+
+
+// 通知&取消預約按鈕
+function appointment_cancelEvent() {
+    let appointmentid = $(this).closest("tr").find(".appointmentid").data("appointmentid");
+    $.post("/Home/AppointmentCancel", { appointmentid: appointmentid }, (result) => {
+        if (result == "") { alert(`成功取消預約，預約編號: ${appointmentid}`) }
+        else { alert("預約取消失敗"); }
+        appointment_queryEvent();
+    })
+    console.log("取消按鈕測試: " + appointmentid);
+}
+
+// 清空搜尋資料
+function appointment_clearEvent() {
+    $("#appointmenSearch")[0].reset();
+}
+
+
+// 點擊通知
+function NotificationBtn() {
+    let inputrer = $(this).closest("tr").find(".NotificationUserid").text();
+    
+    let btnType = $(this).data("type");
+    if (btnType === "notification") { $("#NotificationType").val("NormalNotification"); }
+    else { $("#NotificationType").val("CancelNotification"); }
+
+    let typeinput = $("#NotificationType").val();
+    $("#NotificationInput").val(typeinput);
+    $("#NotificationUser").val(inputrer)
+};
+
+// 送出按鈕
+function NotificationMessageSend() {
+    let myform = $("#NotificationFom").serialize();
+    $.post("/Home/AppointmentNotification", myform, (result) => {
+        if (result === "") { alert("成功送出") }
+        NotificationClose();
+    })
+};
+// 清除按鈕
+function NotificationClearBtn() {
+    $("#NotificationTextarea").val("");
+}
+// 關閉視窗
+function NotificationClose() {
+    console.log("關閉視窗按鈕成功")
+    $('#notificationModal').modal("hide");
+    $("#NotificationTextarea").val("");
+}
+
+
+// 點擊取消預約 ==> 準備統一
+//function NotificationBtnCancelAppointment() {
+//    let inputrer = $(this).closest("tr").find(".NotificationUserid").text();
+//    $("#NotificationType").val("CancelNotification");
+
+
+//    let typeinput = $("#NotificationType").val();
+//    $("#NotificationInput").val(typeinput);
+//    $("#NotificationUser").val(inputrer)
+//};
+
 // #endregion
 
 // #region 可插的HTML
