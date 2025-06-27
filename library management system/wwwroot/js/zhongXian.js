@@ -36,7 +36,11 @@ function appointment_queryEvent() {
     $.post("/Home/AppointmentResult", formData, (result) => {
         $("#AppointmentContent").html(result);
         $(".page-link").on("click", appointment_queryEvent);
-        $(".appoimtmentCancelBtn").on("click", appointment_cancelEvent);
+        // 點擊按鈕
+        $(".appoimtmentCancelBtn, .NotificationBtn").on("click", NotificationBtn);
+        $("#NotificationSend").on("click", NotificationMessageSend);
+        $("#NotificationClear").on("click", NotificationClearBtn);
+        $("#CancelBox").on("click", NotificationClose);
     });
     console.log("查詢刷新~");
 }
@@ -54,6 +58,29 @@ function appointment_cancelEvent() {
 // 清空搜尋資料
 function appointment_clearEvent() {$("#appointmenSearch")[0].reset();
 }
+// 取消預約
+// 通知開啟按鈕
+function NotificationBtn() {
+    let inputrer = $(this).closest("tr").find(".NotificationUserid").text();
+    let typeinput = $("#NotificationType").val();
+    $("#NotificationInput").val(typeinput);
+    $("#NotificationUser").val(inputrer)
+}
+// 送出按鈕
+function NotificationMessageSend() {
+    let myform = $("#notificationModal").serialize();
+    console.log(myform)
+}
+// 清除按鈕
+function NotificationClearBtn() {
+    $("#NotificationTextarea").val("");
+}
+// 關閉視窗
+function NotificationClose() {
+    console.log("關閉視窗按鈕成功")
+    $("#NotificationTextarea").val("");
+}
+
 // #endregion 預約查詢Module "END""
 
 // #region 借閱查詢 Module

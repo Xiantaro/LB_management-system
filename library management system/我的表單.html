@@ -17,9 +17,9 @@
         <input type="text" class="form-control" id="textInputBox" >
     </div>
 
-<div id="myform" class="collapse">
+<div id="NotificationBox" class="collapse">
     <form id="NotificationFom"  class="container mt-5 border border-5 border-danger" style="width: 500px; height: 525px;">
-        <div class="d-flex justify-content-end mx-0"><button type="button" class="btn-close" aria-label="Close"></button></div>
+        <div class="d-flex justify-content-end mx-0"><button type="button" class="btn-close" aria-label="Close" id="CancelBox"></button></div>
         <div class="text-center">
             <h1>取消預約&通知</h1>
         </div>
@@ -29,7 +29,6 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">通知類型:</label>
-                <input type="text" class="form-control d-none" id="" >
                 <select id="NotificationType" class="form-select" aria-label="Default select example">
                     <option  value="CancelNotification" selected>取消預約通知</option>
                     <option value="NormalNotification">一般通知</option>
@@ -37,7 +36,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">內容</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 170px;"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 250px;"></textarea>
             </div>
             <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-success btn-lg" id="NotificationSend">送出</button>
@@ -49,13 +48,29 @@
         // 點擊按鈕
         $("#clickme").on("click", ClikMeme);
         $("#NotificationSend").on("click", NotificationMessageSend);
-        $("#NotificationClear").on("click",NotificationClearBtn)
+        $("#NotificationClear").on("click",NotificationClearBtn);
+        $("#CancelBox").on("click", NotificationClose);
         // 點擊送出
         function ClikMeme() {
             let inputte = $("#textInputBox").val()
-            alert(inputte);
             $("#NotificationUser").val(inputte)
-            $("#myform").toggle(1000);
+            $("#NotificationBox").toggle(1000);
+        }
+        // 送出按鈕
+        function NotificationMessageSend() {
+            console.log("送出")
+            let Type = $("#NotificationType").val();
+            let Content = $("#exampleFormControlTextarea1").val();
+        }
+        // 清除按鈕
+        function NotificationClearBtn(){
+            $("#exampleFormControlTextarea1").val("");
+        }
+        // 關閉視窗
+        function NotificationClose(){
+            console.log("關閉視窗按鈕成功")
+            $("#NotificationBox").prop("style", "display:none");
+            $("#exampleFormControlTextarea1").val("");
         }
         // 送出按鈕
         function NotificationMessageSend() {
