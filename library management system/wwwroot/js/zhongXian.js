@@ -88,7 +88,7 @@ function BorrowModeMode() {
     console.log("借書模式測試");
     $("#content-panel").load("/Home/BorrowMode", () => {
         console.log("借書載入成功");
-        $("#borrowSend, #appointmentSend").on("click", BorrowModeSend);
+        $("#borrowSend").on("click", BorrowModeSend);
         BorrowModeModeUserDynamic();
         BorrowModeModeBookDynamic();
         $("#borrwoMode_UserID").on("input", BorrowModeModeUserDynamic)
@@ -114,7 +114,13 @@ function BorrowModeModeBookDynamic() {
 }
 // 借閱書籍 發送POST
 function BorrowModeSend() {
+    let userId = $("#borrwoMode_UserID").val();
+    let bookId = $("#borrwoMode_BookNumber").val();
+    if (userId === "" && bookId === "") { alert("請輸入借閱者ID和書籍編號"); return;    }
+    if (userId === "") { alert("請輸入借閱者ID!!"); return; }
+    if (bookId === "") { alert("請輸入書籍編號!!"); return; }
     let formData = $("#borrwoModeForm").serialize();
+    
     let btnValue = $(this).val();
     if (btnValue === "borrow") {
         alert(btnValue);
@@ -143,6 +149,8 @@ function ReturnBookMode() {
 
 // 還書送出
 function ReturnBookSend() {
+    let bookId = $("#ReturnBookID").val();
+    if (bookId === "") { alert("請輸入書籍編號!!"); return; }
     let data = $("#ReturnBookIdForm").serialize();
     $.post("/Home/ReturnBookSend", data, (result) => {
         $("#ReturnBookContent").html(result);
@@ -185,6 +193,11 @@ function AppointmentModeBookDynamic() {
 }
 // 預約按鈕發送
 function AppointmentModeSend() {
+    let userId = $("#appointmentMode_UserID").val();
+    let BookId = $("#appointmentMode_BookNumber").val();
+    if (userId === "" && BookId === "") { alert("請輸入借閱者ID和書籍編號"); return; }
+    if (userId === "") { alert("請輸入借閱者ID!!"); return; }
+    if (BookId === "") { alert("請輸入書籍編號!!"); return; }
     let formData = $("#appointmentModeForm").serialize();
     console.log("測試輸入: " + formData);
     $.post("/Home/AppointmentMode1Send", formData, (result) => {
@@ -204,7 +217,6 @@ function CancelBtn_AppointVersion() {
     $(this).closest(".input-group").find(".form-control").val("");
     $("#appointmentQueryBook").remove; $("#appointmentQueryBook").html(appointmentQueryBookHtml); 
 }
-
 
 // #endregion 預約模式 Module END
 
