@@ -44,16 +44,16 @@ namespace library_management_system.Controllers
         
         #endregion
 
-            #region 綷琩高
-            // 綷琩高_穓碝逼_partial
+        #region 綷琩高
+        // 綷琩高_穓碝逼_partial
         public IActionResult BorrowQuery()
         {
             return PartialView("~/Views/Management/P2_zhongXian/BorrowQuery/_BorrowQueryPartial.cshtml");
         }
         // 綷琩高_琩高_partial
-        public IActionResult BorrowResult(string borrow_BorrowID = "All", string borrow_UserID = "All", string borrow_bookNum = "All", string borrow_state = "All", string borrow_perPage = "10", string borrow_date = "borrowDate", string borrow_orderDate = "desc", int page = 1)
+        public IActionResult BorrowResult(string borrow_BorrowID = "All", string borrow_UserID = "All", string borrow_bookNum = "All", string borrow_state = "All",DateTime? borrow_initDate = null, DateTime? borrow_lastDate = null, string borrow_perPage = "10", string borrow_date = "borrowDate", string borrow_order = "desc", int page = 1)
         {
-            Debug.WriteLine($"代刚綷更 {borrow_BorrowID}+{borrow_UserID} + {borrow_bookNum} + {borrow_state} + {borrow_perPage} + {borrow_date} + {borrow_orderDate} + 计: {page}");
+            Debug.WriteLine($"代刚綷更 {borrow_BorrowID}+{borrow_UserID} + {borrow_bookNum} + {borrow_state}+ら戳 + {borrow_initDate} {borrow_lastDate} {borrow_perPage} + {borrow_date} + {borrow_order} + 计: {page}");
             return PartialView("~/Views/Management/P2_zhongXian/BorrowQuery/_BorrowResultPartial.cshtml");
         }
         #endregion

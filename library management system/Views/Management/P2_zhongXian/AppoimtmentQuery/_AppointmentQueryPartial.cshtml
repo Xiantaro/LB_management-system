@@ -1,6 +1,8 @@
 ﻿@{
-    string earliestDate = "2025-01-01";
-    string DateTiemNow = DateTime.Now.ToString("yyyy-MM-dd");
+    DateTime NowTime = DateTime.Now;
+    string Openingtime = "2025-01-01";
+    string twoMonth = NowTime.AddMonths(-2).ToString("yyyy-MM-dd");
+    string DateTiemNow = NowTime.ToString("yyyy-MM-dd");
 }
 <!-- 主內容 START -->
 <div class="row mt-1">
@@ -23,11 +25,11 @@
                 </div>
                 <div>
                     <label for="appointment_initDate" class="form-label mb-0">預約日期範圍</label>
-                    <input name="appointment_initDate" type="date" class="form-control form-control-sm" min="@earliestDate" />
+                    <input id="appointment_initDate" name="appointment_initDate" type="date" class="form-control form-control-sm"  value="@twoMonth"/>
                 </div>
                 <div>
                     <label for="appointment_lastDate" class="form-label mb-0">至</label>
-                    <input name="appointment_lastDate" class="form-control form-control-sm" type="date" max="@DateTiemNow" />
+                    <input id="appointment_lastDate" name="appointment_lastDate" class="form-control form-control-sm" type="date" max="@DateTiemNow"  value="@DateTiemNow"/>
                 </div>
                 <div>
                     <label for="appointment_state" class="form-label mb-0">目前狀態：</label>
