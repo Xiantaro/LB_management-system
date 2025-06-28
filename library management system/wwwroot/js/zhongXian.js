@@ -89,8 +89,6 @@ function BorrowModeMode() {
     $("#content-panel").load("/Home/BorrowMode", () => {
         console.log("借書載入成功");
         $("#borrowSend").on("click", BorrowModeSend);
-        BorrowModeModeUserDynamic();
-        BorrowModeModeBookDynamic();
         $("#borrwoMode_UserID").on("input", BorrowModeModeUserDynamic)
         $("#borrwoMode_BookNumber").on("input", BorrowModeModeBookDynamic);
         $("#borrwoMode_CancelUserIDBtn, #borrwoMode_CancelBookIdBtn").on("click", CancelBtn)
@@ -98,17 +96,21 @@ function BorrowModeMode() {
 }
 // 動態搜尋 借閱者
 function BorrowModeModeUserDynamic() {
-    let userId = $("#borrwoMode_UserID").val();
+    let userId = $("#borrwoMode_UserID").val().trim();
+    if (userId === "") { $("#BorrowModeUser").html(pleaseInputUserId); return; }
     console.log("測試動態借閱者資訊: " + userId);
     $.post("/Home/BorrowUserMessage", { userId: userId }, (result) => {
+
         $("#BorrowModeUser").html(result);
     })
 }
 // 動態搜尋 書本資訊
 function BorrowModeModeBookDynamic() {
-    let bookId = $("#borrwoMode_BookNumber").val();
+    let bookId = $("#borrwoMode_BookNumber").val().trim();
+    if (bookId === "") { $("#BorrowModeBook").html(pleaseInputBookId); return; }
     console.log("測試動態書本資訊: " + bookId);
     $.post("/Home/BorrowBookMessage", { bookId: bookId }, (result) => {
+
         $("#BorrowModeBook").html(result);
     })
 }
@@ -294,4 +296,8 @@ let appointmentQueryBookHtml = `<table class="table mt-2">
                     <tbody>
                     </tbody>
                 </table><h1 class="text-danger">查無書籍</h1>`;
+
+let pleaseInputUserId = `<h1 class="text-danger">請輸入借閱者ID</h1>`;
+let pleaseInputBookId = `<h1 class="text-danger">查無書本</h1>`;
+
 // #endregion

@@ -1,4 +1,4 @@
-﻿<div class="container">
+﻿
     <div class="row">
         <div class="col-5 my-1">
             <h1>借閱模式</h1>
@@ -26,11 +26,15 @@
             <div id="BorrowModeSuccessContent"></div>
         </div>
         <div class="col-7" style="height: 660px">
-            <div id="BorrowModeUser"></div>@*借閱者資訊*@
-            <div id="BorrowModeBook"></div>@*書本資訊*@
+            <div class="d-flex align-items-center align-middle" style="height: 300px;" id="BorrowModeUser">
+                <h1 class="text-danger">請輸入借閱者ID</h1>
+            </div>
+            <div id="BorrowModeBook" class="d-flex align-items-center align-middle flex-row my-3">
+                <h1 class="text-danger">查無書本</h1>
+            </div>@*書本資訊*@
         </div>
     </div>
-</div>
+
 
 
 
